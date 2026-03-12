@@ -8,21 +8,22 @@ const {
   updateMovieById,
   deleteMovieById,
 } = require("../controller/movie.controller");
+const idValidator = require("../middleware/validatedId.middleware");
 
 const movieRouter = Router();
 
 movieRouter.get("/", getAllMovies);
 
-movieRouter.get("/:id", getMovieById);
+movieRouter.get("/:id", idValidator, getMovieById);
 
-movieRouter.get("/:id/reviews", getMovieReviewsById);
+movieRouter.get("/:id/reviews", idValidator, getMovieReviewsById);
 
 movieRouter.post("/", createMovie);
 
-movieRouter.post("/:id/reviews", createMovieReview);
+movieRouter.post("/:id/reviews", idValidator, createMovieReview);
 
-movieRouter.put("/:id", updateMovieById);
+movieRouter.put("/:id", idValidator, updateMovieById);
 
-movieRouter.delete("/:id", deleteMovieById);
+movieRouter.delete("/:id", idValidator, deleteMovieById);
 
 module.exports = movieRouter;
