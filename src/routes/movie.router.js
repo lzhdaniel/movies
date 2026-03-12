@@ -8,7 +8,7 @@ const {
   updateMovieById,
   deleteMovieById,
 } = require("../controller/movie.controller");
-const idValidator = require("../middleware/validatedId.middleware");
+const idValidator = require("../middleware/validateId.middleware");
 
 const movieRouter = Router();
 
