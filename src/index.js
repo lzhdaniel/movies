@@ -7,6 +7,7 @@ const limiter = require("./middleware/rateLimit.middleware");
 const morganLogger = require("./middleware/morgan.middleware");
 const logger = require("./utils/logger");
 const finalErrorHandler = require("./middleware/final.error.middleware");
+const connectDB = require("./utils/db");
 const PORT = process.env.PORT;
 
 const app = express();
@@ -21,6 +22,8 @@ app.use("/v1", v1Router);
 
 app.use(finalErrorHandler);
 
-app.listen(PORT, () => {
-  logger.info(`Server is listening on port ${PORT}`);
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    logger.info(`Server is listening on port ${PORT}`);
+  });
 });
